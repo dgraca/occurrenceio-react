@@ -15,6 +15,7 @@ function App() {
         >
           Learn React
         </a>
+        <p class="bg-red-200">Hello this is tailwindcss</p>
       </header>
     </div>
   );

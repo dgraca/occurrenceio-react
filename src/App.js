@@ -10,13 +10,15 @@ function App() {
     // The path prop is used to define the path of the route
     // The element prop is used to define the component that will be rendered when the route is accessed
     // The BrowserRouter component is used to define the router of the application
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Occurrences */}
-        <Route path="/occurrences" element={<OccurrencesIndex />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Occurrences */}
+          <Route path="/occurrences" element={<OccurrencesIndex />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -13,7 +13,7 @@ class Navbar extends React.Component {
 
                 <div className="w-full sm:mt-0 mt-4 flex flex-col sm:flex-row justify-end mx-auto text-gray-600 dark:text-gray-300 gap-2">
                     <Link to="/occurrences">Ocorrências</Link>
-                    <Link to="/albums">Estados</Link>
+                    <Link to="/states">Estados</Link>
                 </div>
             </nav>
         );

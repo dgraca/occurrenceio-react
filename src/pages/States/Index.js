@@ -45,7 +45,7 @@ class StatesIndex extends React.Component {
         }
 
         return (
-        <div>
+        <>
             <Navbar />
             <div className="w-full flex flex-col items-center py-8">
                     <section className="container px-4 mx-auto">
@@ -84,7 +84,7 @@ class StatesIndex extends React.Component {
             </div>
             <br />
             <Footer />
-        </div> 
+        </> 
         );
     }
 }

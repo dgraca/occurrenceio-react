@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
+import Swal from "sweetalert2";
 
 class OccurrencesIndex extends React.Component {
     constructor(props) {
@@ -38,6 +39,63 @@ class OccurrencesIndex extends React.Component {
                 console.error('Error fetching occurrences:', error);
             });
         
+    }
+
+    // method to delete an occurrence
+    async deleteOccurrence(id) {
+        // opens a modal to confirm the deletion
+        Swal.fire({
+            title: 'Tem a certeza que pretende apagar esta ocorrência?',
+            text: "Esta ação é irreversível!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4caf50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'Sim, apagar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            // if the user confirms the deletion
+            if (result.isConfirmed) {
+                // set the request options
+                var requestOptions = {
+                    method: 'DELETE',
+                    redirect: 'follow'
+                };
+
+                // send the request to the API
+                fetch('/api/ReportsAPI/' + id, requestOptions)
+                    .then(response => {
+                        // if the response is ok, show a success message
+                        if (response.ok) {
+                            Swal.fire({
+                                title: 'Apagado!',
+                                text: 'A ocorrência foi apagada.',
+                                icon: 'success',
+                                confirmButtonColor: '#4caf50',
+                                confirmButtonText: 'OK'
+                            }).then(async (result) => {
+                                // if the user clicks the ok button, reload the page
+                                if (result.isConfirmed) {
+                                    await this.getOccurrences();
+                                }
+                            });
+                        }
+                        // if the response is not ok, show an error message
+                        else {
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Ocorreu um erro ao apagar a ocorrência.',
+                                icon: 'error',
+                                confirmButtonColor: '#4caf50',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error deleting occurrence:', error);
+                    });
+            }
+        });
     }
 
     render() {
@@ -106,7 +164,7 @@ class OccurrencesIndex extends React.Component {
                                                     </td>
                                                     <td className="px-4 py-4 text-sm whitespace-nowrap"> 
                                                         <div className="flex items-center gap-x-6">
-                                                            <div className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-red-400 hover:bg-red-500 px-6 py-2">Apagar</div>
+                                                            <div onClick={() => this.deleteOccurrence(occurrence.id)} className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-red-400 hover:bg-red-500 px-6 py-2">Apagar</div>
                                                         </div>
                                                     </td>
                                                 </tr>

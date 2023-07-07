@@ -112,7 +112,10 @@ class OccurrencesIndex extends React.Component {
                 <Navbar />
                 <div className="w-full flex flex-col items-center py-8">
                     <section className="container px-4 mx-auto">
-                    <h2 className="text-lg font-medium text-gray-800 dark:text-gray-800">Lista de Ocorrências</h2>
+                    <div class="w-full mt-4 flex flex-row items-start justify-between">
+                        <h2 className="text-lg font-medium text-gray-800 dark:text-gray-800">Lista de Ocorrências</h2>
+                        <Link to="/occurrences/create" className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-blue-400 hover:bg-blue-500 px-4 py-2">Criar nova ocorrência</Link>
+                    </div>
                         <div className="flex flex-col mt-6">
                             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

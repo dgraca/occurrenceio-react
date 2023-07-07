@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import OccurrencesIndex from "./pages/Ocurrences/Index";
+import OccurrencesCreate from "./pages/Ocurrences/Create";
 import OccurrencesDetails from "./pages/Ocurrences/Details";
 import OccurrencesEdit from "./pages/Ocurrences/Edit";
 import StatesIndex from "./pages/States/Index";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* Occurrences */}
           <Route path="/occurrences" element={<OccurrencesIndex />} />
+          <Route path="/occurrences/create" element={<OccurrencesCreate />} />
           <Route path="/occurrences/:id/edit" element={<OccurrencesEdit />} />
           <Route path="/occurrences/:id/details" element={<OccurrencesDetails />} />
           {/* States */}

@@ -155,7 +155,7 @@ class OccurrencesIndex extends React.Component {
                                                     </td>
                                                     <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div className="flex items-center gap-x-6">
-                                                            <div className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-blue-400 hover:bg-blue-500 px-4 py-2">Detalhes</div>
+                                                        <Link to={{ pathname: `/occurrences/${occurrence.id}/details`, id: occurrence.id }} className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-blue-400 hover:bg-blue-500 px-4 py-2">Detalhes</Link>
                                                         </div>
                                                     </td>
                                                     <td class="px-4 py-4 text-sm whitespace-nowrap">

@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "../../Components/Navbar";
 import Footer from "../../Components/Footer";
+import { Link } from "react-router-dom";
 
 class OccurrencesIndex extends React.Component {
     constructor(props) {
@@ -101,7 +102,7 @@ class OccurrencesIndex extends React.Component {
                                                     </td>
                                                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                         <div class="flex items-center gap-x-6">
-                                                            <div className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-yellow-400 hover:bg-yellow-500 px-4 py-2">Editar</div>
+                                                            <Link to={{ pathname: `/occurrences/${occurrence.id}/edit`, id: occurrence.id }} className="text-gray-900 whitespace-no-wrap tracking-wider font-bold rounded-md bg-yellow-400 hover:bg-yellow-500 px-4 py-2">Editar</Link>
                                                         </div>
                                                     </td>
                                                     <td class="px-4 py-4 text-sm whitespace-nowrap"> 

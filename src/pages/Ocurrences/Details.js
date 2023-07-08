@@ -58,6 +58,9 @@ class OccurrencesDetails extends React.Component {
             return <p>Loading occurrence...</p>;
         }
 
+        // Get the current server's base URL
+        const serverBaseUrl = window.location.origin;
+
         return (
         <>
             <Navbar />
@@ -84,8 +87,22 @@ class OccurrencesDetails extends React.Component {
                             <label className="text-gray-700 dark:text-gray-200">Longitude</label>
                             <input name="longitude" value={occurrence.longitude} id="longitude" type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" readOnly />
                         </div>
-
                     </div>
+                    <br />
+                    <div>
+                        <label className="text-gray-700 dark:text-gray-200">Imagens</label>
+                        <div>
+                            {occurrence.listReportImage?.map(image => (
+                                <img 
+                                    key={image.id}
+                                    src={`${serverBaseUrl}/${image.name}`}
+                                    alt="Report Image"
+                                    className="w-100 mt-2 h-full rounded-lg mx-auto"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    
                 </section>
             </div>
             <br />

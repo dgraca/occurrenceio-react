@@ -152,6 +152,9 @@ class OccurrencesEdit extends React.Component {
             return <p>Loading occurrence...</p>;
         }
 
+        // Get the current server's base URL
+        const serverBaseUrl = window.location.origin;
+
         return (
         <>
             <Navbar />
@@ -181,12 +184,28 @@ class OccurrencesEdit extends React.Component {
                                 <input name="longitude" value={occurrence.longitude} onChange={e => this.handleFieldChange(e)} id="longitude" type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                             </div>
 
+                            
+                        </div>
+                        <br />
+                        <div>
+                            <label className="text-gray-700 dark:text-gray-200">Imagens</label>
+                            <br />
+                            <input name="images" id="images" type="file" accept=".jpg,.jpeg,.png" multiple className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+                        </div>
+                        <br />
+                        <div>
+                            <label className="text-gray-700 dark:text-gray-200">Imagens Atuais</label>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagens</label>
-                                <input name="images" id="images" type="file" multiple className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+                                {occurrence.listReportImage?.map(image => (
+                                    <img 
+                                        key={image.id}
+                                        src={`${serverBaseUrl}/${image.name}`}
+                                        alt="Report Image"
+                                        className="w-100 mt-2 h-full rounded-lg mx-auto"
+                                    />
+                                ))}
                             </div>
                         </div>
-
                         <div className="flex justify-end mt-6">
                             <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Editar</button>
                         </div>

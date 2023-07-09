@@ -24,6 +24,7 @@ class OccurrencesCreate extends React.Component {
                 longitude: "",
                 images: []
             },
+            errors: {},
             loading: false
         };
     }
@@ -51,6 +52,10 @@ class OccurrencesCreate extends React.Component {
     async createOccurrence(event, occurrence) {
         // prevent default form submission
         event.preventDefault();
+
+        // clear all errors
+        this.setState({ errors: [] });
+
         
         // set the request options
         var requestOptions = {
@@ -83,7 +88,13 @@ class OccurrencesCreate extends React.Component {
                 if (res.ok) {
                     // redirect to the occurrences index page
                     this.props.navigate("/occurrences");
+                    return;
                 }
+                // response is not OK, handle message erros that come from the API
+                res.json().then(data => {
+                    // set the errors state
+                    this.setState({ errors: data?.errors });
+                });
             })
             .catch(error => {
                 console.error('Error creating occurrence:', error);
@@ -92,7 +103,16 @@ class OccurrencesCreate extends React.Component {
 
     render() {
         // get the occurrences and loading state from the current state
-        const { occurrence, loading } = this.state;
+        const { occurrence, errors, loading } = this.state;
+
+        // store the errors in an array
+        const errorsComponents = [];
+
+        // show the errors
+        for (const [key, value] of Object.entries(errors)) {
+            errorsComponents[key] = <p key={key}>{value}</p>;
+        }
+
 
         return (
             <>
@@ -106,21 +126,25 @@ class OccurrencesCreate extends React.Component {
                                 <div>
                                     <label className="text-gray-700 dark:text-gray-200">Título</label>
                                     <input name="title" value={occurrence.title} onChange={e => this.handleFieldChange(e)} id="title" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    <label className="text-sm text-red-700 dark:text-red-200">{ errorsComponents["Title"] }</label>
                                 </div>
 
                                 <div>
                                     <label className="text-gray-700 dark:text-gray-200">Descrição</label>
                                     <input name="description" value={occurrence.description} onChange={e => this.handleFieldChange(e)} id="description" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    <label className="text-sm text-red-700 dark:text-red-200">{ errorsComponents["Description"] }</label>
                                 </div>
 
                                 <div>
                                     <label className="text-gray-700 dark:text-gray-200">Latitude</label>
                                     <input name="latitude" value={occurrence.latitude} onChange={e => this.handleFieldChange(e)} id="latitude" type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    <label className="text-sm text-red-700 dark:text-red-200">{ errorsComponents["Latitude"] }</label>
                                 </div>
 
                                 <div>
                                     <label className="text-gray-700 dark:text-gray-200">Longitude</label>
                                     <input name="longitude" value={occurrence.longitude} onChange={e => this.handleFieldChange(e)} id="longitude" type="number" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                                    <label className="text-sm text-red-700 dark:text-red-200">{ errorsComponents["Longitude"] }</label>
                                 </div>
 
                                 <div>

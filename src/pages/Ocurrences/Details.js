@@ -50,6 +50,28 @@ class OccurrencesDetails extends React.Component {
             });
     }
 
+    // method to delete an image
+    async deleteImage(id) {
+        // set the request options
+        var requestOptions = {
+            method: 'DELETE',
+            redirect: 'follow'
+        };
+
+        const url = '/api/ReportsAPI/DeleteImage/' + id;
+        fetch(url, requestOptions)
+            .then(res => {
+                if (res.ok) {
+                    // redirect to the occurrences index page
+                    this.props.navigate("/occurrences");
+                    return;
+                } 
+            })
+            .catch(error => {
+                console.error('Error fetching occurrences:', error);
+            });
+    }
+
     render() {
         const { occurrence, loading } = this.state;
 
@@ -93,12 +115,15 @@ class OccurrencesDetails extends React.Component {
                         <label className="text-gray-700 dark:text-gray-200">Imagens</label>
                         <div>
                             {occurrence.listReportImage?.map(image => (
-                                <img 
-                                    key={image.id}
-                                    src={`${serverBaseUrl}/${image.name}`}
-                                    alt="Report Image"
-                                    className="w-100 mt-2 h-full rounded-lg mx-auto"
-                                />
+                                <div className="w-full flex flex-row items-center justify-between">
+                                    <img 
+                                        key={image.id}
+                                        src={`${serverBaseUrl}/${image.name}`}
+                                        alt="Report Image"
+                                        className="h-40 mt-2 rounded-lg mx-auto"
+                                    />
+                                    <button onClick={() => this.deleteImage(image.id)} className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Eliminar</button>
+                                </div>
                             ))}
                         </div>
                     </div>

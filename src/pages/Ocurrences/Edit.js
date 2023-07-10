@@ -171,6 +171,9 @@ class OccurrencesEdit extends React.Component {
             return <p>Loading occurrence...</p>;
         }
 
+        // Get the current server's base URL
+        const serverBaseUrl = window.location.origin;
+
         return (
         <>
             <Navbar />
@@ -204,12 +207,28 @@ class OccurrencesEdit extends React.Component {
                                 <label className="text-sm text-red-700 dark:text-red-200">{ errorsComponents["Longitude"] }</label>
                             </div>
 
+                            
+                        </div>
+                        <br />
+                        <div>
+                            <label className="text-gray-700 dark:text-gray-200">Imagens</label>
+                            <br />
+                            <input name="images" id="images" type="file" accept=".jpg,.jpeg,.png" multiple className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+                        </div>
+                        <br />
+                        <div>
+                            <label className="text-gray-700 dark:text-gray-200">Imagens Atuais</label>
                             <div>
-                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagens</label>
-                                <input name="images" id="images" type="file" multiple className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+                                {occurrence.listReportImage?.map(image => (
+                                    <img 
+                                        key={image.id}
+                                        src={`${serverBaseUrl}/${image.name}`}
+                                        alt="Report Image"
+                                        className="w-100 mt-2 h-full rounded-lg mx-auto"
+                                    />
+                                ))}
                             </div>
                         </div>
-
                         <div className="flex justify-end mt-6">
                             <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Editar</button>
                         </div>

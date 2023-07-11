@@ -12,7 +12,7 @@
     "sweetalert2": "^11.7.12",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "https://localhost:7238",
+  "proxy": "https://ocurrenceio-aspnet20230710155046.azurewebsites.net/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
